@@ -13,17 +13,6 @@ return new class extends Migration
     {
         Schema::create('activity', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::create('activity', function (Blueprint $table) {
-            $table->id();
             $table->string('description', 100)->comment('descripcion actividad');
             $table->integer('hours')->comment('horas estimadas');
             $table->unsignedBigInteger('technician_id');
@@ -36,5 +25,13 @@ return new class extends Migration
                    ->onUpdate('cascade'); 
             $table->timestamps();
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('activity');
     }
 };

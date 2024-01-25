@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(RoleSeeder::class);
+       /*  $this->call(RoleSeeder::class);
         $this->call(CausalSeeder::class);
         $this->call(ObservationSeeder::class);
         $this->call(TypeActivitySeeder::class);
@@ -44,7 +44,9 @@ class DatabaseSeeder extends Seeder
         
 
         Technician::factory(2)->create();
+    */
 
+    $this->call(TestTechnicianSeeder::class);
 
     }
 }

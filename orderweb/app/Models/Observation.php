@@ -9,4 +9,10 @@ class Observation extends Model
 {
     use HasFactory;
     protected $table = 'observation';
+    protected $fillable = ['descripcion'];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
