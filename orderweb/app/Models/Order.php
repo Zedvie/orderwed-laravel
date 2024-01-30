@@ -8,23 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $table = 'casual';
-    protected $fillable = ['legalizaton_date',
-'adres'];
+    protected $table = 'Order';
+    protected $fillable = [
+        'legalization_date',
+        'addres',
+        'city',
+        'observation_id',
+        'causal_id'];
 
-    public function casual()
-    {
-        return $this->belongsTo(Casual::class);
-    }
+        public function Causal()
+        {
+            return $this->belongsTo(Causal::class);
 
-    public function odservation()
-    {
-        return $this->belongsTo(Odservation::class);
-    }
+        }
 
-    public function activities()
-    {
-        return $this->belongsToMany(Activity::class,'order_activity',
+        public function observation()
+        {
+            return $this->belongsTo(Observation::class);
+        }
+
+        public function activities()
+
+        {
+            return $this->belongsToMany(Activity::class, 'order_activity',
                                             'order_id', 'activity_id');
-    }
+        }
+
 }

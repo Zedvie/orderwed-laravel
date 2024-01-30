@@ -14,11 +14,11 @@ class CausalSeeder extends Seeder
     public function run(): void
     {
         Causal::insert([
-            ['description' => 'REPARACIÓN CONTADOR'],
-            ['description' => 'SUSPENSIÓN DEL SERVICIO'],
-            ['description' => 'RECONEXIÓN DEL SERVICIO'],
-            ['description' => 'INSTALACION DEL CONTADOR'],
-            ['description' => 'CAMBIO DEL CONTADOR'],
+            ['description' => 'Reparacion contador'],
+            ['description' => 'Suspencion del servicio'],
+            ['description' => 'Reconexion del servicio'],
+            ['description' => 'Instalacion del contador'],
+            ['description' => 'Cambio del contador']
         ]);
     }
 }

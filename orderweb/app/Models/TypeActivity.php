@@ -9,10 +9,13 @@ class TypeActivity extends Model
 {
     use HasFactory;
     protected $table = 'type_activity';
-    protected $fillable = ['descripcion'];
+    protected $fillable = [
+        'description'
+    ];
 
     public function activities()
     {
         return $this->hasMany(Activity::class);
     }
+    
 }

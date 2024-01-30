@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('nombre del usuario');
+            $table->string('name')->comment('nombre de usuario');
             $table->string('email')->unique()->comment('correo unico');
-            $table->string('password')->comment('contraseña del acceso');
-            $table->foreignId('role_id')->constrained('role')->onDelet('cascade')->onUpdate('cascade');
-            $table->rememberToken()->comment('token recuperación contraseña');
+            $table->string('password')->comment('contraseña de acceso');
+            $table->foreignId('role_id')-> constrained('role')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->rememberToken()->comment('token recuperacion contraseña');
             $table->timestamps();
         });
     }
