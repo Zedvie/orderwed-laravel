@@ -1,6 +1,6 @@
 @extends('templates.base')
-@section('title', 'Crear Técnico')
-@section('header','Crear Técnico')
+@section('title', 'crear tecnico')
+@section('header', 'Crear tecnico')
 @section('content')
     @include('templates.messages')
     <div class="row">
@@ -10,45 +10,40 @@
                 <div class="row form-group">
                     <div class="col-lg-6 mb-4">
                         <label for="document">Documento</label>
-                        <input type="text" class="form-control" 
-                        id="derscription" name="description" required>
+                        <input type="number" class="form-control"
+                         id="document" name="document" required>
                     </div>
                     <div class="col-lg-6 mb-4">
                         <label for="name">Nombre</label>
-                        <input type="text" class="form-control" 
-                        id="name" name="name" required>
+                        <input type="text" class="form-control"
+                         id="name" name="name" required>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-lg-6 mb-4">
-                        <label for="especiality">especialidad</label>
-                        <section name=especiality id="especiality"
-                        class="form-control" required>
-                        </section>
+                        <label for="especiality">Especialidad</label>
+                        <input type="text" class="form-control"
+                         id="especiality" name="especiality" required>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <label for="phone">Telefono</label>
+                        <input type="number" class="form-control"
+                         id="phone" name="phone" required>
                     </div>
                 
-                    <div class="col-lg-6 mb-4">
-                        <label for="phone">telefono</label>
-                        <section type="number" name=phoned id="phone"
-                        class="form-control" required>
-                        </section>
-                    </div>
                 </div>
 
                 <div class="row form-group">
                     <div class="col-lg-6 mb-4">
-                        <button class="btn btn-primary btn-block"
-                                type="submit">
-                            Guardar
-                        </button>
+                            <button class="btn btn-primary btn-block" type="submit">
+                               Guardar
+                            </button>
                     </div>
                     <div class="col-lg-6 mb-4">
-                        <a href="{{ route('technician.index') }}" class="btn btn-secondary btn-block">
-                    Cancelar
-                        </a>
+                            <a href="{{ route('technician.index') }}" class="btn btn-secondary btn-block">
+                               Cancelar
+                            </a>
                     </div>
-                    
-
                 </div>
             </form>
         </div>

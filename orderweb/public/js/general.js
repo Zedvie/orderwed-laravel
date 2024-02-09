@@ -1,11 +1,11 @@
 $(document).ready(function(){
-    $('#table_data').DataTable();
+    $('#table_data').DataTable()
 });
 
 function remove()
 {
-    if(confirm("¿Esta seguro de eliminar el reguistro?"))
-    return true;
+    if(confirm("¿Esta seguro de eliminar el registro?"))
+        return true;
     else
-    return false;
+        return false;
 }

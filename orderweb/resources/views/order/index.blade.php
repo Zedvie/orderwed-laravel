@@ -29,7 +29,7 @@
                     <td>14-03-2005</td>
                     <td>tres esquinas</td>
                     <td>Ninguna</td>
-                    <td>Reparacion contador</td>
+                    <td>Reparacion contador</td>      
                     <td>
                         <a href="#" title="editar" class="btn btn-info btn-circle btn-sm">
                             <i class="far fa-edit"></i>

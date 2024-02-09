@@ -7,7 +7,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">ORDER WED</div>
+                <div class="sidebar-brand-text mx-3">order web</div>
             </a>
 
             <!-- Divider -->
@@ -37,8 +37,8 @@
                 </a>
                 <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Consultar</a>
-                        <a class="collapse-item" href="#">Crear</a>                        
+                        <a class="collapse-item" href="{{ route('order.index') }}">Consultar</a>
+                        <a class="collapse-item" href="{{ route('order.create') }}">Crear</a>                        
                     </div>
                 </div>
             </li> 
@@ -65,7 +65,7 @@
                 </a>
                 <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('observation.index') }}">Consultar</a>
+                        <a class="collapse-item" href="{{ route('observation.index')  }}">Consultar</a>
                         <a class="collapse-item" href="{{ route('observation.create') }}">Crear</a>
                     </div>
                 </div>

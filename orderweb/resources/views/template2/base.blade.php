@@ -5,27 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 </head>
 <body>
     <div id="container">
-        @include('templates2/banner')
+        @include('template2/banner')
 
         <div>
             <aside>
-                @include('templates2/menu')
+                @include('template2/menu')
             </aside>
-
             <section>
-                <!-- qui se insertan las paginas que heredan de este template -->
+                <!-- aqui inserta las paginas que
+                heredan de este template -->
+
                 @yield('content')
             </section>
             <br>
-            @include('templates2/footer')
+            @include('template2/footer')
         </div>
+    
     </div>
-
-    <script src="{{ asset('js/test.js') }}"></script>
-    @yield('scripts')
-</body>
+        <script src="{{ asset('js/test.js') }}"></script>
+        @yield('scripts')
+    </body>
 </html>

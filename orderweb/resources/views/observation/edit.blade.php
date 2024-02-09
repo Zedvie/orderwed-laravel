@@ -1,6 +1,6 @@
 @extends('templates.base')
-@section('title', 'Editar Odservaciones')
-@section('header','Editar Odservaciones')
+@section('title', 'Editar observacion')
+@section('header', 'Editar observacion')
 @section('content')
     @include('templates.messages')
     <div class="row">
@@ -9,25 +9,23 @@
                 @csrf
                 <div class="row form-group">
                     <div class="col-lg-12 mb-4">
-                        <label for="description">Descripción</label>
-                        <input type="text" class="form-control" 
-                        id="derscription" name="description" required>
+                        <label for="description">Descripcion</label>
+                        <input type="text" class="form-control"
+                         id="description" name="description" required>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-lg-6 mb-4">
-                        <button class="btn btn-primary btn-block"
+                            <button class="btn btn-primary btn-block"
                                 type="submit">
-                            Guardar
-                        </button>
+                               Guardar
+                            </button>
                     </div>
                     <div class="col-lg-6 mb-4">
-                        <a href="{{ route('observation.index') }}" class="btn btn-secondary btn-block">
-                    Cancelar
-                        </a>
+                            <a href="{{ route('observation.index') }}" class="btn btn-secondary btn-block">
+                               Cancelar
+                            </a>
                     </div>
-                    
-
                 </div>
             </form>
         </div>

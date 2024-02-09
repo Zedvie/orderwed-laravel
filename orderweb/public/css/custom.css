@@ -1,10 +1,10 @@
 h1{
     color: brown;
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 button{
-    background-color: darkblue;
+    background-color: blue;
     color: aliceblue;
 }
 
@@ -17,9 +17,10 @@ q{
     display: block;
     margin-left: auto;
     margin-right: auto;
+
 }
 
-.copyright{
+.copyrigth{
     margin: 0 auto;
     font-style: italic;
     font-size: small;
@@ -28,21 +29,24 @@ q{
 
 .vertical_menu{
     width: 200px;
+
 }
 
-.vertical_menu a{
+.vertical_menu{
     background-color: #eee;
     color: black;
     display: block;
     padding: 12px;
     text-decoration: none;
+
 }
 
 .vertical_menu a:hover{
-    background-color: #ccc;
+    background-color: #ccc; 
 }
 
 .vertical_menu a:active{
-    background-color: #04aa6d;
+    background-color: #04aa6d; 
     color: white;
 }
+

@@ -7,7 +7,7 @@ use App\Models\Order;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TestOrderSeeder extends Seeder
+class TestOrderseeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,12 +16,12 @@ class TestOrderSeeder extends Seeder
     {
         $order = new Order();
         $order->legalization_date = '2024-01-29';
-        $order->address = 'Cra 1 # 2 - 3';
-        $order->city = 'Tulua';
-        $order->odservation_id = null;
-
-        $casual = Causal::find(2);
-        $order->causal_id = $casual->id;
+        $order->addres = 'cra 1 # 2 -3';
+        $order->city = 'TULUA';
+        $order->observation_id = null;
+        //FK causal
+        $causal = Causal::find(2);
+        $order->causal_id = $causal->id;
         $order->save();
     }
 }
