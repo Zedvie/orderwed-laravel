@@ -12,8 +12,7 @@ class ObservationController extends Controller
      */
     public function index()
     {
-        $observations = Observation::all();   //selet * from causal
-        //dd($causals);
+        $observations = Observation::all(); // select * from causal
         return view('observation.index', compact('observations'));
     }
 
@@ -31,7 +30,7 @@ class ObservationController extends Controller
     public function store(Request $request)
     {
         $observation = Observation::create($request->all());
-        session()->flash('menssage', 'Reguistro creado exitosamente');
+        session()->flash('message', 'Registro creado exitosamente');
         return redirect()->route('observation.index');
     }
 
@@ -48,13 +47,16 @@ class ObservationController extends Controller
      */
     public function edit(string $id)
     {
+        {
         $observation = Observation::find($id);
         if($observation) // si la causal existe
         {
-            return view('observation.edit', compact('observation') );
+            return view('observation.edit', compact('observation'));
         }
-        else{
+        else
+        {
             return redirect()->route('observation.index');
+        }
         }
     }
 
@@ -63,18 +65,17 @@ class ObservationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $observation  = Observation::find($id);
-        if($observation ) // si la causal existe
+        $observation = Observation::find($id);
+        if($observation) // si la causal existe
         {
-            $observation->update($request->all());       //
-            session()->flash('message','Registro actualizado exitosamente');
+           $observation->update($request->all());
+            session()->flash('message', 'Registro actualizado exitosamente');
         }
         else
         {
-            session()->flash('warning','No se encuentra el registro solicitado');
-            
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+           
         }
-
         return redirect()->route('observation.index');
     }
 
@@ -86,15 +87,14 @@ class ObservationController extends Controller
         $observation = Observation::find($id);
         if($observation) // si la causal existe
         {
-            $observation->delete();  //delete from causal where id = x
-            session()->flash('message','Registro eliminado exitosamente');
+            $observation->delete(); //delete from causal where id = x
+            session()->flash('message', 'Registro eliminado exitosamente');
         }
         else
         {
-            session()->flash('warning','No se encuentra el registro solicitado');
-            
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+           
         }
-
         return redirect()->route('observation.index');
     }
 }

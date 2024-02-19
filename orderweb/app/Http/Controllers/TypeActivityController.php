@@ -12,7 +12,7 @@ class TypeActivityController extends Controller
      */
     public function index()
     {
-        $type_activities = TypeActivity::all();   //selet * from causal
+        $type_activities = TypeActivity::all(); // select * from causal
         //dd($causals);
         return view('type_activity.index', compact('type_activities'));
     }
@@ -30,8 +30,8 @@ class TypeActivityController extends Controller
      */
     public function store(Request $request)
     {
-        $type_activity  = TypeActivity::create($request->all());
-        session()->flash('menssage', 'Reguistro creado exitosamente');
+        $type_activity = TypeActivity::create($request->all());
+        session()->flash('message', 'Registro creado exitosamente');
         return redirect()->route('type_activity.index');
     }
 
@@ -51,9 +51,10 @@ class TypeActivityController extends Controller
         $type_activity = TypeActivity::find($id);
         if($type_activity) // si la causal existe
         {
-            return view('type_activity.edit', compact('type_activity') );
+            return view('type_activity.edit', compact('type_activity'));
         }
-        else{
+        else
+        {
             return redirect()->route('type_activity.index');
         }
     }
@@ -63,18 +64,17 @@ class TypeActivityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $type_activity  = TypeActivity::find($id);
-        if($type_activity ) // si la causal existe
+        $type_activity = TypeActivity::find($id);
+        if($type_activity) // si la causal existe
         {
-            $type_activity->update($request->all());       //
-            session()->flash('message','Registro actualizado exitosamente');
+           $type_activity->update($request->all());
+            session()->flash('message', 'Registro actualizado exitosamente');
         }
         else
         {
-            session()->flash('warning','No se encuentra el registro solicitado');
-            
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+           
         }
-
         return redirect()->route('type_activity.index');
     }
 
@@ -86,15 +86,14 @@ class TypeActivityController extends Controller
         $type_activity = TypeActivity::find($id);
         if($type_activity) // si la causal existe
         {
-            $type_activity->delete();  //delete from causal where id = x
-            session()->flash('message','Registro eliminado exitosamente');
+            $type_activity->delete(); //delete from causal where id = x
+            session()->flash('message', 'Registro eliminado exitosamente');
         }
         else
         {
-            session()->flash('warning','No se encuentra el registro solicitado');
-            
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+           
         }
-
         return redirect()->route('type_activity.index');
     }
 }

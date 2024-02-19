@@ -3,16 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Technician;
+use App\Models\TypeActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ActivityController extends Controller
-{
+{   
+    private $rules = [
+        'description' => 'required|string|max:100|min:3',
+        'hours' => 'required|numeric|max:9999999999|min:1',
+        'technician_id' => 'required|numeric|max:99999999999999999999',
+        'type_id' => 'required|numeric|max:99999999999999999999',
+    ];
+
+    private $traductionAtributes = [
+        'description' => 'descripción',
+        'hours' => 'horas',
+        'technician_id' => 'tecnico',
+        'type_id' => 'tipo'
+    ];
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $activities = Activity::all();   //selet * from causal
+        $activities = Activity::all(); // select * from causal
         //dd($causals);
         return view('activity.index', compact('activities'));
     }
@@ -22,7 +40,9 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        $technicians = Technician::all();
+        $types = TypeActivity::all();
+        return view('activity.create', compact('technicians', 'types'));
     }
 
     /**
@@ -30,9 +50,17 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        $activitiy = Activity::create($request->all());
-        session()->flash('menssage', 'Reguistro creado exitosamente');
-        return redirect()->route('causal.index');
+        $validator = Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAtributes);
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('activity.create')->withInput()->withErrors($errors);
+        }
+        
+        $activity = Activity::create($request->all());
+        session()->flash('message', 'Registro creado exitosamente');
+        return redirect()->route('activity.index');
     }
 
     /**
@@ -48,7 +76,17 @@ class ActivityController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $activity = Activity::find($id);
+        if($activity)
+        {
+
+        $technicians = Technician::all();
+        $types = TypeActivity::all();
+        return view('activity.edit', compact('activity', 'technicians', 'types'));
+        }
+
+        session()->flash('warning', 'No se encuntra el registro solicitado');
+        return redirect()->route('activity.index');
     }
 
     /**
@@ -56,19 +94,26 @@ class ActivityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $activitiy = Activity::find($id);
-        if($activitiy) 
+        $validator = Validator::make($request->all(), $this->rules);
+        if($validator->fails())
         {
-            $activitiy->update($request->all());       
-            session()->flash('message','Registro actualizado exitosamente');
+            $errors = $validator->errors();
+            return redirect()->route('activity.edit', $id)->withInput()->withErrors($errors);
+        }
+
+
+        $activity = Activity::find($id);
+        if($activity) // si la causal existe
+        {
+           $activity->update($request->all());
+            session()->flash('message', 'Registro actualizado exitosamente');
         }
         else
         {
-            session()->flash('warning','No se encuentra el registro solicitado');
-            
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+           
         }
-
-        return redirect()->route('activitiy.index');
+        return redirect()->route('activity.index');
     }
 
     /**
@@ -76,18 +121,17 @@ class ActivityController extends Controller
      */
     public function destroy(string $id)
     {
-        $activitiy = Activity::find($id);
-        if($activitiy) 
+        $activity = Activity::find($id);
+        if($activity) // si la causal existe
         {
-            $activitiy->delete();  
-            session()->flash('message','Registro eliminado exitosamente');
+            $activity->delete(); //delete from causal where id = x
+            session()->flash('message', 'Registro eliminado exitosamente');
         }
         else
         {
-            session()->flash('warning','No se encuentra el registro solicitado');
-            
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+           
         }
-
-        return redirect()->route('activitiy.index');
+        return redirect()->route('activity.index');
     }
 }

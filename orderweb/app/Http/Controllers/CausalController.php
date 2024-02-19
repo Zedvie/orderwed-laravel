@@ -4,15 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Causal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CausalController extends Controller
 {
+    private $rules = [
+        'description' => 'required|string|max:100|min:3',
+    ];
+
+    private $traductionAtributes = [
+        'description' => 'description',
+    ];
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $causals = Causal::all();   //selet * from causal
+        $causals = Causal::all(); // select * from causal
         //dd($causals);
         return view('causal.index', compact('causals'));
     }
@@ -25,13 +35,22 @@ class CausalController extends Controller
         return view('causal.create');
     }
 
-    /**
+    /** 
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        
+        $validator = Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAtributes);
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('causal.create')->withInput()->withErrors($errors);
+        }
+        
         $causal = Causal::create($request->all());
-        session()->flash('menssage', 'Reguistro creado exitosamente');
+        session()->flash('message', 'Registro creado exitosamente');
         return redirect()->route('causal.index');
     }
 
@@ -51,9 +70,10 @@ class CausalController extends Controller
         $causal = Causal::find($id);
         if($causal) // si la causal existe
         {
-            return view('causal.edit', compact('causal') );
+            return view('causal.edit', compact('causal'));
         }
-        else{
+        else
+        {
             return redirect()->route('causal.index');
         }
     }
@@ -66,15 +86,14 @@ class CausalController extends Controller
         $causal = Causal::find($id);
         if($causal) // si la causal existe
         {
-            $causal->update($request->all());       //
-            session()->flash('message','Registro actualizado exitosamente');
+           $causal->update($request->all());
+            session()->flash('message', 'Registro actualizado exitosamente');
         }
         else
         {
-            session()->flash('warning','No se encuentra el registro solicitado');
-            
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+           
         }
-
         return redirect()->route('causal.index');
     }
 
@@ -86,15 +105,14 @@ class CausalController extends Controller
         $causal = Causal::find($id);
         if($causal) // si la causal existe
         {
-            $causal->delete();  //delete from causal where id = x
-            session()->flash('message','Registro eliminado exitosamente');
+            $causal->delete(); //delete from causal where id = x
+            session()->flash('message', 'Registro eliminado exitosamente');
         }
         else
         {
-            session()->flash('warning','No se encuentra el registro solicitado');
-            
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+           
         }
-
         return redirect()->route('causal.index');
     }
 }

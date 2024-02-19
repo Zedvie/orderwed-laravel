@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($causals as $causal)
+                @foreach($causals as $causal)
                     <tr>
                         <td>{{ $causal['id'] }}</td>
                         <td>{{ $causal['description'] }}</td>
@@ -34,7 +34,7 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach    
+                @endforeach
             </tbody>
         </table>
     </div>

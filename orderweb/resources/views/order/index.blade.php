@@ -15,6 +15,7 @@
         <table id="table_data" class="table table-striped table-hover">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Fecha de legalizacion</th>
                     <th>Direccion</th>
                     <th>Ciudad</th>
@@ -24,21 +25,24 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($orders as $order)
                 <tr>
-                    <td>1</td>
-                    <td>14-03-2005</td>
-                    <td>tres esquinas</td>
-                    <td>Ninguna</td>
-                    <td>Reparacion contador</td>      
+                    <td>{{ $order['id'] }}</td>
+                    <td>{{ $order['legalization_date'] }}</td>
+                    <td>{{ $order['addres'] }}</td>
+                    <td>{{ $order['city'] }}</td>
+                    <td>{{ optional($order->observation)->description ?? '' }}</td>   
+                    <td>{{ optional($order->causal)->description ?? '' }}</td>    
                     <td>
-                        <a href="#" title="editar" class="btn btn-info btn-circle btn-sm">
+                        <a href="{{ route('order.edit', $order['id']) }}" title="editar" class="btn btn-info btn-circle btn-sm">
                             <i class="far fa-edit"></i>
                         </a>
-                        <a href="#" title="eliminar" class="btn btn-danger btn-circle btn-sm" onclick="return remove()">
+                        <a href="{{ route('order.destroy', $order['id']) }}" title="eliminar" class="btn btn-danger btn-circle btn-sm" onclick="return remove()">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
