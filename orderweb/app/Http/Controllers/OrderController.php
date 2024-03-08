@@ -9,10 +9,28 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\Return_;
 
 class OrderController extends Controller
 {
+    private $rules = [
+        'legalization_date' => 'required|date|date_format:Y-M-d|min:1',
+        'addres' => 'required|max:1000|min:1',
+        'city' => 'required|string|max:100|min:3',
+        'observation_id' => 'numeric',
+        'causal_id' => 'required|numeric'
+    ];
+
+    private $traductionAtributes = [
+        'legalization_date' => 'fecha de legalizacion',
+        'addres' => 'direccion',
+        'city' => 'ciudad',
+        'observation_id' => 'observacion',
+        'causal_id' => 'causal'
+    ];
+
+
     /**
      * Display a listing of the resource.
      */
@@ -43,6 +61,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAtributes);
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('order.create')->withInput()->withErrors($errors);
+        }
+        
         $order = Order::created($request->all());
         session()->flash('message', 'Registro creado exitosamente');
         return redirect()->route('order.index');
@@ -93,6 +119,14 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validator = Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAtributes);
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('order.edit', $id)->withInput()->withErrors($errors);
+        }
+        
         $order = Order::find($id);
         if($order)
         {
